@@ -7,8 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/")
@@ -22,14 +21,11 @@ public class RootController {
 		return "index";
 	}
 	
-	@PostMapping(headers = "HX-Request")
-	public String htmxAddTodoItem(Model model,HttpServletResponse response) {
+	@PostMapping(path = "clicked")
+	@ResponseBody
+	public String clicked() {
 		
-		List list = List.of("A");
-		model.addAttribute("item", list);
-		
-		response.setHeader("HX-Trigger", "itemAdded");
-		return "fragements :: todoItem";
+		return "Clicked";
 	}
 
 }
